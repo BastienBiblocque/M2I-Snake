@@ -1,33 +1,35 @@
 ﻿// See https://aka.ms/new-console-template for more information
-int P1_Score = 0;
-int P2_Score = 0;
+using Snake;
+
+Player P1 = new Player("Bastien");
+Player P2 = new Player("JP");
 
 Boolean isWin = false;
 
 while (!isWin)
 {
-	P1_Score = RollDiceAndAdd(P1_Score);
-	P2_Score = RollDiceAndAdd(P2_Score);
+	P1.Score = RollDiceAndAdd(P1.Score);
+	P2.Score = RollDiceAndAdd(P2.Score);
 
-	if (P1_Score > 50)
+	if (P1.Score > 50)
 	{
-		P1_Score = 25;
+		P1.Score = 25;
 	}
-	else if (P2_Score > 50)
+	else if (P2.Score > 50)
 	{
-		P2_Score = 25;
+		P2.Score = 25;
 	}
-	else if (P1_Score == 50 || P2_Score == 50)
+	else if (P1.Score == 50 || P2.Score == 50)
 	{
 		isWin = true;
 	}
 }
 
-if (P1_Score == 50) {
-	Console.WriteLine("P1 WIN");
+if (P1.Score == 50) {
+	Console.WriteLine(P1.Name + " WIN");
 }
 else {
-	Console.WriteLine("P2 WIN");
+	Console.WriteLine(P2.Name + " WIN");
 }
 
 static int RollDiceAndAdd(int Player_score)
