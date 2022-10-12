@@ -8,12 +8,10 @@ namespace Snake
 {
 	internal class Player
 	{
-
 		public Player(String name) {
 			Score = 0;
 			Name = name;
 		}
-
 		public int Score { get; set; }
 		public String Name { get; set; }
 	}

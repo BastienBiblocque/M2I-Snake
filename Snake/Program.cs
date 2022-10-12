@@ -1,40 +1,40 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿using System.Diagnostics;
+using System.Reflection;
 using Snake;
 
-Player P1 = new Player("Bastien");
-Player P2 = new Player("JP");
+Boolean StillPlay = true;
 
-Boolean isWin = false;
+List <Player> PlayerList = new List<Player>();
 
-while (!isWin)
+PlayerList.Add(new Player("Bastien"));
+PlayerList.Add(new Player("JP"));
+
+while (StillPlay)
 {
-	P1.Score = RollDiceAndAdd(P1.Score);
-	P2.Score = RollDiceAndAdd(P2.Score);
-
-	if (P1.Score > 50)
-	{
-		P1.Score = 25;
-	}
-	else if (P2.Score > 50)
-	{
-		P2.Score = 25;
-	}
-	else if (P1.Score == 50 || P2.Score == 50)
-	{
-		isWin = true;
-	}
+    foreach (Player player in PlayerList)
+    {
+        StillPlay = PlayTurnAndReturnStillPlay(player);
+        if (!StillPlay)
+            break;
+    }
 }
 
-if (P1.Score == 50) {
-	Console.WriteLine(P1.Name + " WIN");
-}
-else {
-	Console.WriteLine(P2.Name + " WIN");
-}
-
-static int RollDiceAndAdd(int Player_score)
+static Boolean PlayTurnAndReturnStillPlay(Player player)
 {
-	Random rnd = new Random();
-	int dice = rnd.Next(6);
-	return Player_score + dice;
+    player.Score = RollDiceAndAdd(player.Score);
+    if (player.Score > 50)
+        player.Score = 25;
+    else if (player.Score == 50)
+    {
+        Console.WriteLine(player.Name + " WIN");
+        return false;
+    }
+    return true;
+}
+
+static int RollDiceAndAdd(int PlayerScore)
+{
+	Random Rnd = new Random();
+	int Dice = Rnd.Next(6);
+	return PlayerScore + Dice;
 }
